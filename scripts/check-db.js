@@ -8,7 +8,7 @@ import { PrismaClient } from '../generated/prisma/client.js';
 const MIN_VERSION = '9.4.0';
 const MIN_VERSION_NUM = 90400;
 
-if (process.env.SKIP_DB_CHECK) {
+if (process.env.SKIP_DB_CHECK || process.env.VERCEL) {
   console.log('Skipping database check.');
   process.exit(0);
 }

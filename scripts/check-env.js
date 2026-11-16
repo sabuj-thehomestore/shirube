@@ -18,7 +18,7 @@ function checkMissing(vars) {
   }
 }
 
-if (!process.env.SKIP_DB_CHECK && !process.env.DATABASE_TYPE) {
+if (!process.env.SKIP_DB_CHECK && !process.env.DATABASE_TYPE && !process.env.VERCEL) {
   checkMissing(['DATABASE_URL']);
 }
 
