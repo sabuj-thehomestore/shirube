@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: shirube
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter # or free
+    region: oregon # choose oregon, frankfurt, ohio, singapore
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shirube-db
+          property: connectionString
+      - key: APP_SECRET
+        generateValue: true
+      - key: DISABLE_TELEMETRY
+        value: "1"
+      - key: PORT
+        value: "3000"
+
+databases:
+  - name: shirube-db
+    plan: free # or starter
+    databaseName: shirube
+    user: shirube
+    region: oregon
