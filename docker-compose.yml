@@ -1,0 +1,38 @@
+---
+services:
+  shirube:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://shirube:shirube@db:5432/shirube
+      # Generate with: openssl rand -hex 32
+      APP_SECRET: ${APP_SECRET:?Set APP_SECRET in your .env file}
+      # Required for two-factor authentication, generate with: openssl rand -hex 32
+      TWO_FACTOR_ENCRYPTION_KEY: replace-me-with-a-64-character-hex-string
+    depends_on:
+      db:
+        condition: service_healthy
+    init: true
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:3000/api/heartbeat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: shirube
+      POSTGRES_USER: shirube
+      POSTGRES_PASSWORD: shirube
+    volumes:
+      - shirube-db-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  shirube-db-data:
