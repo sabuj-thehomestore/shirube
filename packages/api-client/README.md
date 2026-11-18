@@ -14,7 +14,7 @@ pnpm add @umami/api-client
 import { UmamiClient } from '@umami/api-client';
 
 // Umami Cloud
-const umami = new UmamiClient({ apiKey: process.env.UMAMI_API_KEY });
+const umami = new UmamiClient({ apiKey: 'your-api-key' });
 
 // Self-hosted
 const umami = new UmamiClient({

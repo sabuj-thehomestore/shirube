@@ -179,7 +179,7 @@ export async function updateTeam(teamId: string, data: Prisma.TeamUpdateInput): 
 
 export async function deleteTeam(teamId: string) {
   const { client, transaction } = prisma;
-  const cloudMode = !!process.env.CLOUD_MODE;
+  const cloudMode = false;
 
   const websites = await client.website.findMany({
     where: { teamId, deletedAt: null },

@@ -24,7 +24,7 @@ import { formatLongNumber } from '@/lib/format';
 import { SearchConsoleChart } from './SearchConsoleChart';
 import { SearchConsoleTable } from './SearchConsoleTable';
 
-const INTEGRATIONS_URL = `${process.env.cloudUrl || ''}/settings/integrations`;
+const INTEGRATIONS_URL = '/settings/integrations';
 
 export function SearchConsolePage({ websiteId }: { websiteId: string }) {
   const website = useWebsite();
@@ -55,7 +55,7 @@ function UpgradePlaceholder() {
       >
         <Button
           variant="primary"
-          onPress={() => window.open(`${process.env.cloudUrl}/settings/billing`, '_blank')}
+          onPress={() => window.open('/settings/billing', '_blank')}
         >
           {tm(labels.upgrade)}
         </Button>

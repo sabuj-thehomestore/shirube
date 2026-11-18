@@ -19,7 +19,7 @@ export function LogoutPage() {
       } finally {
         removeClientAuthToken();
         setUser(null);
-        window.location.href = `${process.env.basePath || ''}/login`;
+        window.location.href = '/login';
       }
     }
 

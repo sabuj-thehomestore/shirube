@@ -6,10 +6,6 @@ import { getTwoFactorConfigurationError, isTwoFactorConfigured } from '@/lib/two
 import { canEnforceTwoFactorAuthForEveryone } from '@/permissions';
 
 export async function POST(request: Request) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const schema = z.object({ required: z.boolean() });
 
   const { auth, body, error } = await parseRequest(request, schema);

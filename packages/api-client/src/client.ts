@@ -39,7 +39,7 @@ function positional<K extends OperationId>(
  * Typed client for the Umami API. Every method corresponds to an OpenAPI `operationId`.
  *
  * ```ts
- * const umami = new UmamiClient({ baseUrl: 'https://api.umami.is/v1', apiKey: process.env.UMAMI_API_KEY });
+ * const umami = new UmamiClient({ baseUrl: 'https://api.umami.is/v1', apiKey: 'your-api-key' });
  * const stats = await umami.getWebsiteStats({ websiteId, startAt, endAt });
  * ```
  *

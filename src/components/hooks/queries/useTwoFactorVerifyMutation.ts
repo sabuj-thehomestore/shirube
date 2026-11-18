@@ -9,12 +9,11 @@ interface TwoFactorVerifyParams {
 
 export function useTwoFactorVerifyMutation() {
   const { useMutation } = useApi();
-  const basePath = process.env.basePath || '';
 
   return useMutation({
     mutationFn: async ({ partialToken, token, backupCode }: TwoFactorVerifyParams) => {
       const body = backupCode ? { backupCode } : { token };
-      const res = await httpPost(`${basePath}/api/2fa/verify`, body, {
+      const res = await httpPost('/api/2fa/verify', body, {
         Authorization: `Bearer ${partialToken}`,
       });
 

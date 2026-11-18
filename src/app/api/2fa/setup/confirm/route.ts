@@ -13,10 +13,6 @@ import { claimOtp } from '@/lib/two-factor/replay-prevention';
 import { verifyTotp } from '@/lib/two-factor/totp';
 
 export async function POST(request: Request) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const schema = z.object({ token: z.string().length(6) });
 
   const { auth, body, error } = await parseRequest(request, schema, { allowTwoFactorSetup: true });

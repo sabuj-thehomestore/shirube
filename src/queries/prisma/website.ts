@@ -291,7 +291,7 @@ export async function resetWebsite(websiteId: string) {
 
 export async function deleteWebsite(websiteId: string) {
   const { transaction } = prisma;
-  const cloudMode = !!process.env.CLOUD_MODE;
+  const cloudMode = false;
 
   return transaction(
     async tx => {

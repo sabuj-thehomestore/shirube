@@ -7,10 +7,6 @@ import { updateUser } from '@/queries/prisma/user';
 import { canEnforceTwoFactorAuthForUser } from '@/permissions';
 
 export async function GET(request: Request, { params }: { params: Promise<{ userId: string }> }) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const { auth, error } = await parseRequest(request);
 
   if (error) {
@@ -29,10 +25,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ user
 }
 
 export async function POST(request: Request, { params }: { params: Promise<{ userId: string }> }) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const schema = z.object({ required: z.boolean() });
 
   const { auth, body, error } = await parseRequest(request, schema);
@@ -58,10 +50,6 @@ export async function POST(request: Request, { params }: { params: Promise<{ use
 }
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ userId: string }> }) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const { auth, error } = await parseRequest(request);
 
   if (error) {

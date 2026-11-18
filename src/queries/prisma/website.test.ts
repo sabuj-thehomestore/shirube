@@ -188,7 +188,7 @@ describe('website delete dependencies', () => {
     transactionMock.mockReset();
     redisDelMock.mockReset();
     redisSetMock.mockReset();
-    delete process.env.CLOUD_MODE;
+
     process.env.DATABASE_URL = 'postgresql://user:pass@localhost:5432/umami?schema=public';
   });
 
@@ -291,7 +291,7 @@ describe('website cache invalidation', () => {
     redisDelMock.mockReset();
     redisSetMock.mockReset();
     redisState.enabled = true;
-    delete process.env.CLOUD_MODE;
+
     process.env.DATABASE_URL = 'postgresql://user:pass@localhost:5432/umami?schema=public';
   });
 

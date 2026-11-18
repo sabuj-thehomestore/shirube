@@ -58,5 +58,5 @@ export function isApiKeyBlockedPath(pathname: string) {
 }
 
 export function isApiKeyEnabled() {
-  return !process.env.CLOUD_MODE;
+  return true;
 }

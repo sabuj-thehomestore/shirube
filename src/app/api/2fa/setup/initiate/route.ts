@@ -14,10 +14,6 @@ import prisma from '@/lib/prisma';
 import { getUser } from '@/queries/prisma/user';
 
 export async function POST(request: Request) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const { auth, error } = await parseRequest(request, null, { allowTwoFactorSetup: true });
 
   if (error) {

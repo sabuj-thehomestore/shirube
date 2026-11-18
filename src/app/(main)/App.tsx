@@ -51,7 +51,7 @@ export function App({ children }) {
 
   useEffect(() => {
     if (isBillingPastDue && (!teamId || isOwner)) {
-      window.location.href = `${process.env.cloudUrl}/settings/billing`;
+      window.location.href = '/settings/billing';
     }
   }, [isBillingPastDue, isOwner, teamId]);
 
@@ -60,9 +60,7 @@ export function App({ children }) {
   }
 
   if (error) {
-    window.location.href = config.cloudMode
-      ? `${process.env.cloudUrl}/login`
-      : `${process.env.basePath || ''}/login`;
+    window.location.href = '/login';
     return null;
   }
 
@@ -125,25 +123,7 @@ export function App({ children }) {
       {passwordChangeRequired && !needsTwoFactorSetup && <PasswordChangeRequiredModal />}
       <UpdateNotice user={user} config={config} />
       {process.env.NODE_ENV === 'production' && !pathname.includes('/share/') && (
-        <Script src={`${process.env.basePath || ''}/telemetry.js`} />
-      )}
-      {process.env.selfTrack && (
-        <Script
-          async
-          data-website-id={process.env.selfTrack}
-          src={`${process.env.basePath || ''}/script.js`}
-          data-cache="true"
-          data-performance="true"
-          data-errors="true"
-        />
-      )}
-      {process.env.selfRecord && (
-        <Script
-          async
-          data-website-id={process.env.selfRecord}
-          data-sample-rate="1"
-          src={`${process.env.basePath || ''}/recorder.js`}
-        />
+        <Script src="/telemetry.js" />
       )}
     </Grid>
   );

@@ -46,9 +46,7 @@ export function UserButton({ showText = true, onClose }: UserButtonProps) {
   const { isMobile } = useMobile();
   const router = useRouter();
 
-  const getUrl = (url: string) => {
-    return cloudMode ? `${process.env.cloudUrl}${url}` : url;
-  };
+  const getUrl = (url: string) => url;
 
   const handleNavigate = (url: string, target?: string) => {
     onClose?.();

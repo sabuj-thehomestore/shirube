@@ -12,7 +12,7 @@ export default function RootPage() {
     const lastTeam = getItem(LAST_TEAM_CONFIG);
 
     // Without a token we already know the user is logged out; skip the /websites.
-    if (!process.env.cloudMode && !getClientAuthToken()) {
+    if (!getClientAuthToken()) {
       router.replace('/login');
     } else if (lastTeam) {
       router.replace(`/teams/${lastTeam}/websites`);

@@ -3,7 +3,7 @@ import { LoginTwoFactorPage } from './LoginTwoFactorPage';
 import { LoginPageWrapper } from '@/app/login/LoginPage';
 
 export default async function () {
-  if (process.env.DISABLE_LOGIN || process.env.CLOUD_MODE) {
+  if (process.env.DISABLE_LOGIN) {
     return null;
   }
 

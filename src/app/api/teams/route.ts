@@ -50,22 +50,6 @@ export async function POST(request: Request) {
   const teamId = uuid();
   const teamOwnerId = ownerId && auth.user.isAdmin ? ownerId : auth.user.id;
 
-  let account = null;
-
-  if (process.env.CLOUD_MODE) {
-    account = await fetchAccount(teamOwnerId);
-
-    const teamLimit = getCloudTeamLimit(account);
-
-    if (teamLimit !== null) {
-      const count = await getUserOwnedTeamCount(teamOwnerId);
-
-      if (count >= teamLimit) {
-        return unauthorized({ message: 'Team limit reached.' });
-      }
-    }
-  }
-
   const team = await createTeam(
     {
       id: teamId,
@@ -74,22 +58,6 @@ export async function POST(request: Request) {
     },
     teamOwnerId,
   );
-
-  if (process.env.CLOUD_MODE && redis.enabled && account) {
-    await redis.client.set(
-      `team:${teamId}`,
-      {
-        teamOwnerId,
-        isPro: account.isPro || false,
-        isBusiness: account.isBusiness || false,
-        isNoBilling: account.isNoBilling || false,
-        hasSubscription: account.hasSubscription || false,
-        unlimitedWebsites: account.unlimitedWebsites || false,
-        billingStatus: account.billingStatus || null,
-      },
-      60 * 60 * 24 * 90,
-    );
-  }
 
   return json(team);
 }

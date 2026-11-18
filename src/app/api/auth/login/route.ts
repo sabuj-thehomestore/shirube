@@ -30,12 +30,9 @@ export async function POST(request: Request) {
 
   const { id, role, createdAt } = user;
   const passwordChangeRequired = hasDefaultPassword(user);
-  const cloudMode = !!process.env.CLOUD_MODE;
 
   // Check if 2FA is enabled for this user
-  const twoFactor = !cloudMode
-    ? await prisma.client.twoFactorAuth.findUnique({ where: { userId: id } })
-    : null;
+  const twoFactor = await prisma.client.twoFactorAuth.findUnique({ where: { userId: id } });
 
   if (twoFactor?.isEnabled) {
     if (!isTwoFactorConfigured()) {
@@ -53,7 +50,7 @@ export async function POST(request: Request) {
   }
   // 2FA is required but not set up yet: the session is limited to the setup routes until it is.
   const twoFactorSetup =
-    !cloudMode && isTwoFactorConfigured() && !!(await getTwoFactorRequiredReason(id));
+    isTwoFactorConfigured() && !!(await getTwoFactorRequiredReason(id));
 
   // Bind token to password hash so a password change invalidates old tokens.
   const pwd = hash(user.password);

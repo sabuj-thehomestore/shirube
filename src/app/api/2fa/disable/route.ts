@@ -14,10 +14,6 @@ import { checkPassword } from '@/lib/password';
 import { getUser } from '@/queries/prisma/user';
 
 export async function POST(request: Request) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const schema = z.object({
     password: z.string(),
     token: z.string().length(6),

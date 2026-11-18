@@ -25,13 +25,9 @@ export function SharedSharesTable({
   const { isMobile } = useMobile();
 
   const getUrl = (slug: string) => {
-    if (cloudMode) {
-      return `${process.env.cloudUrl}/share/${slug}`;
-    }
-
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
-    return `${origin}${process.env.basePath || ''}/share/${slug}`;
+    return `${origin}/share/${slug}`;
   };
 
   return (

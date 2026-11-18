@@ -39,14 +39,7 @@ export async function GET(request: Request) {
   const scope = teamId ? await getTeamBillingScope(teamId) : { accountId: auth.user.id };
   const account = await fetchAccount(scope.accountId ?? auth.user.id);
   const subscription = normalizeSubscription(account);
+  const { billingStatus, isOwner, ...response } = subscription;
 
-  if (!process.env.CLOUD_MODE) {
-    const { billingStatus, isOwner, ...response } = subscription;
-
-    return Response.json(response, { headers });
-  }
-
-  const { isOwner } = await getBillingAccess(scope, auth.user.id);
-
-  return Response.json({ ...subscription, isOwner }, { headers });
+  return Response.json(response, { headers });
 }

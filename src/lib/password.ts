@@ -13,10 +13,5 @@ export function checkPassword(password: string, passwordHash: string) {
 }
 
 export function hasDefaultPassword(user: { id: string; password: string } | null | undefined) {
-  // Cloud accounts are not created by the seed migration.
-  if (process.env.CLOUD_MODE) {
-    return false;
-  }
-
   return user?.id === SYSTEM_USER_ID && user.password === SYSTEM_USER_PASSWORD_HASH;
 }

@@ -170,22 +170,6 @@ export async function POST(request: Request) {
       return withCorsHeaders(json({ ok: false, reason: 'recorder_disabled' }));
     }
 
-    if (process.env.CLOUD_MODE && (await isWebsiteCollectionBlocked(website))) {
-      return withCorsHeaders(forbidden({ message: 'Collection blocked.' }));
-    }
-
-    if (process.env.CLOUD_MODE) {
-      const account = website.teamId
-        ? await fetchTeam(website.teamId)
-        : website.userId
-          ? await fetchAccount(website.userId)
-          : null;
-
-      if (!account?.isBusiness && !account?.isNoBilling) {
-        return withCorsHeaders(forbidden({ message: 'Business subscription required.' }));
-      }
-    }
-
     // Client info for bot/IP checks
     const { ip, userAgent } = await getClientInfo(request, {});
 

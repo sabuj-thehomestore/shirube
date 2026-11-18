@@ -35,7 +35,7 @@ export function getApiUrl(url: string, options: ApiUrlOptions = {}) {
     return url;
   }
 
-  const { apiUrl = process.env.apiUrl || '', basePath = process.env.basePath || '' } = options;
+  const { apiUrl = process.env.apiUrl || '', basePath = '' } = options;
   const useApiUrl = apiUrl && !isAppRoute(url);
   const baseUrl = useApiUrl
     ? isAbsoluteUrl(apiUrl)

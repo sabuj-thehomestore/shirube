@@ -52,9 +52,7 @@ export function WebsiteReplaySettings({ websiteId }: { websiteId: string }) {
     config.sampleRate,
   ]);
 
-  const recorderUrl = cloudMode
-    ? `${process.env.cloudUrl}/${RECORDER_NAME}`
-    : `${window?.location?.origin || ''}${process.env.basePath || ''}/${RECORDER_NAME}`;
+  const recorderUrl = `${window?.location?.origin || ''}/${RECORDER_NAME}`;
 
   const recorderCode = `<script defer src="${recorderUrl}" data-website-id="${websiteId}"></script>`;
   const sectionLabel = `${t(labels.replays)} & ${t(labels.heatmaps)}`;
@@ -127,7 +125,7 @@ export function WebsiteReplaySettings({ websiteId }: { websiteId: string }) {
         >
           <Button
             variant="primary"
-            onPress={() => window.open(`${process.env.cloudUrl}/settings/billing`, '_blank')}
+            onPress={() => window.open('/settings/billing', '_blank')}
           >
             {t(labels.upgrade)}
           </Button>

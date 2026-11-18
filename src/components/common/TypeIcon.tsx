@@ -15,7 +15,7 @@ export function TypeIcon({
 }) {
   const iconValue = type === 'browser' && value === 'browser' ? 'unknown' : value;
   const showUnknown = unknown ?? (!iconValue || iconValue.toLowerCase() === 'unknown');
-  const blank = `${process.env.basePath || ''}/images/${type}/unknown.png`;
+  const blank = `/images/${type}/unknown.png`;
 
   return (
     <Row gap="3" alignItems="center">
@@ -25,7 +25,7 @@ export function TypeIcon({
         <img
           src={
             iconValue
-              ? `${process.env.basePath || ''}/images/${type}/${iconValue.replace(/[ ./]/g, '-').toLowerCase()}.png`
+              ? `/images/${type}/${iconValue.replace(/[ ./]/g, '-').toLowerCase()}.png`
               : blank
           }
           onError={e => {

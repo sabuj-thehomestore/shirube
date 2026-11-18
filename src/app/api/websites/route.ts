@@ -37,21 +37,6 @@ export async function POST(request: Request) {
 
   const { id, name, domain, shareId, teamId } = body;
 
-  if (process.env.CLOUD_MODE) {
-    const account = teamId ? await fetchTeam(teamId) : await fetchAccount(auth.user.id);
-    const websiteLimit = getCloudWebsiteLimit(account);
-
-    if (websiteLimit !== null) {
-      const count = teamId
-        ? await getTeamWebsiteCount(teamId)
-        : await getWebsiteCount(auth.user.id);
-
-      if (count >= websiteLimit) {
-        return unauthorized({ message: 'Website limit reached.' });
-      }
-    }
-  }
-
   const canCreate = teamId
     ? await canCreateTeamWebsite(auth, teamId)
     : await canCreateWebsite(auth);

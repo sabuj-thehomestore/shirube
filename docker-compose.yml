@@ -6,6 +6,7 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgresql://shirube:shirube@db:5432/shirube
+      REDIS_URL: ${REDIS_URL:-}
       # Generate with: openssl rand -hex 32
       APP_SECRET: ${APP_SECRET:?Set APP_SECRET in your .env file}
       # Required for two-factor authentication, generate with: openssl rand -hex 32

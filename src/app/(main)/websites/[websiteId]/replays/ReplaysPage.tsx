@@ -42,7 +42,7 @@ export function ReplaysPage({ websiteId }: { websiteId: string }) {
           >
             <Button
               variant="primary"
-              onPress={() => window.open(`${process.env.cloudUrl}/settings/billing`, '_blank')}
+              onPress={() => window.open('/settings/billing', '_blank')}
             >
               {t(labels.upgrade)}
             </Button>

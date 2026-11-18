@@ -3,10 +3,6 @@ import { parseRequest } from '@/lib/request';
 import { json, notFound } from '@/lib/response';
 
 export async function POST(request: Request) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const { auth, error } = await parseRequest(request, null, { allowTwoFactorSetup: true });
 
   if (error) {

@@ -18,7 +18,7 @@ export type Config = {
  */
 export function getConfig(): Config {
   return {
-    cloudMode: !!process.env.CLOUD_MODE,
+    cloudMode: false,
     faviconUrl: process.env.FAVICON_URL,
     linksUrl: process.env.LINKS_URL,
     pixelsUrl: process.env.PIXELS_URL,

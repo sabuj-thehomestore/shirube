@@ -26,18 +26,10 @@ export function TeamsButton() {
   const selectedKeys = new Set([teamId || 'user']);
   const label = teamId ? team?.name : user.username;
 
-  const cloudMode = !!process.env.cloudMode;
-
-  const getUrl = (url: string) => {
-    return cloudMode ? `${process.env.cloudUrl}${url}` : url;
-  };
+  const getUrl = (url: string) => url;
 
   const handleNavigate = (url: string) => {
-    if (cloudMode) {
-      window.location.href = url;
-    } else {
-      router.push(url);
-    }
+    router.push(url);
   };
 
   const handleAction = async (key: Key) => {

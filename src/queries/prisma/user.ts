@@ -120,7 +120,7 @@ export async function updateUser(userId: string, data: Prisma.UserUpdateInput) {
 
 export async function deleteUser(userId: string) {
   const { client, transaction } = prisma;
-  const cloudMode = !!process.env.CLOUD_MODE;
+  const cloudMode = false;
 
   const websites = await client.website.findMany({
     where: { userId },

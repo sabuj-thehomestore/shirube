@@ -34,7 +34,7 @@ export function SimpleShareEditForm({
   const [error, setError] = useState<any>(null);
 
   const getUrl = (slug: string) => {
-    return `${config?.cloudMode ? process.env.cloudUrl : window?.location.origin}${process.env.basePath || ''}/share/${slug}`;
+    return `${window?.location.origin}/share/${slug}`;
   };
 
   useEffect(() => {

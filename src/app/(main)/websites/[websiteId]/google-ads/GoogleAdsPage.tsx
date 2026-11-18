@@ -33,7 +33,7 @@ import { GoogleAdsChart } from './GoogleAdsChart';
 import { GoogleAdsConversionsTable } from './GoogleAdsConversionsTable';
 import { GoogleAdsTable } from './GoogleAdsTable';
 
-const INTEGRATIONS_URL = `${process.env.cloudUrl || ''}/settings/integrations`;
+const INTEGRATIONS_URL = '/settings/integrations';
 
 // Cloud rejects longer ranges. Narrowing the range here instead would show a lower total
 // spend under a date filter that still says "All time".
@@ -77,7 +77,7 @@ function UpgradePlaceholder() {
       >
         <Button
           variant="primary"
-          onPress={() => window.open(`${process.env.cloudUrl}/settings/billing`, '_blank')}
+          onPress={() => window.open('/settings/billing', '_blank')}
         >
           {tm(labels.upgrade)}
         </Button>

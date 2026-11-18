@@ -7,13 +7,7 @@ import { canViewWebsiteSection } from './share';
 import { canDeleteWebsite, canUpdateWebsite, canViewWebsite } from './website';
 
 async function hasReportBillingAccess(report: Report) {
-  if (!process.env.CLOUD_MODE) {
-    return true;
-  }
-
-  const website = await getWebsite(report.websiteId);
-
-  return !!website && !(await getBillingAccess(await getWebsiteBillingScope(website))).isPastDue;
+  return true;
 }
 
 export function getReportSection(type?: string): ShareSection | null {

@@ -13,8 +13,6 @@ const isVercel = Boolean(process.env.VERCEL);
 
 const apiUrl = process.env.API_URL || '';
 const basePath = process.env.BASE_PATH || '';
-const cloudMode = process.env.CLOUD_MODE || '';
-const cloudUrl = process.env.CLOUD_URL || '';
 const collectApiEndpoint = process.env.COLLECT_API_ENDPOINT || '';
 const corsMaxAge = process.env.CORS_MAX_AGE || '';
 const defaultCurrency = process.env.DEFAULT_CURRENCY || '';
@@ -22,8 +20,6 @@ const defaultLocale = process.env.DEFAULT_LOCALE || '';
 const forceSSL = process.env.FORCE_SSL || '';
 const trackerScriptName = process.env.TRACKER_SCRIPT_NAME || '';
 const trackerScriptURL = process.env.TRACKER_SCRIPT_URL || '';
-const selfTrack = process.env.UMAMI_SELF_TRACK || '';
-const selfRecord = process.env.UMAMI_SELF_RECORD || '';
 
 function isRelativeUrl(url: string) {
   return Boolean(url && !/^https?:\/\//i.test(url));
@@ -198,13 +194,6 @@ if (trackerScriptName) {
   }
 }
 
-if (isProd && cloudMode) {
-  rewrites.push({
-    source: '/script.js',
-    destination: 'https://cloud.umami.is/script.js',
-  });
-}
-
 /** @type {import('next').NextConfig} */
 export default withNextIntl({
   reactStrictMode: false,
@@ -213,16 +202,11 @@ export default withNextIntl({
   },
   env: {
     apiUrl,
-    basePath,
-    cloudMode,
-    cloudUrl,
     currentVersion: pkg.version,
     defaultCurrency,
     defaultLocale,
-    selfTrack,
-    selfRecord,
   },
-  basePath,
+  basePath: basePath || undefined,
   output: isVercel ? undefined : 'standalone',
   typescript: {
     ignoreBuildErrors: true,

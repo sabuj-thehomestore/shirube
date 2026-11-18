@@ -39,8 +39,7 @@ export interface GoogleAdsQueryError extends Error {
 // Google Ads is a Cloud integration: the data is read from Google by the Cloud app, which
 // serves the dashboard on the same origin and authenticates the request with its session.
 function getQueryUrl() {
-  const base =
-    process.env.cloudUrl || (typeof window !== 'undefined' ? window.location.origin : '');
+  const base = typeof window !== 'undefined' ? window.location.origin : '';
 
   return `${base.replace(/\/+$/, '')}/api/integrations/google-ads/query`;
 }

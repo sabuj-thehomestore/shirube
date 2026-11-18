@@ -21,10 +21,6 @@ import { verifyTotp } from '@/lib/two-factor/totp';
 import { getAllUserTeams, getUser } from '@/queries/prisma';
 
 export async function POST(request: Request) {
-  if (process.env.CLOUD_MODE) {
-    return notFound();
-  }
-
   const schema = z.union([
     z.object({ token: z.string().length(6) }).strict(),
     z.object({ backupCode: z.string().min(1) }).strict(),
